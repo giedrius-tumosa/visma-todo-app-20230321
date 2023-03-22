@@ -1,4 +1,5 @@
-import { renderTaskList } from "./TaskList.js";
+import TaskList from "./TaskList.js";
+import { taskList } from "./main.js";
 
 export default class Task {
   constructor(props) {
@@ -113,14 +114,18 @@ export default class Task {
         taskData.tasks[taskIndex].completedOn = "";
         sessionStorage.setItem("todoAppData", JSON.stringify(taskData));
         this.taskCard.classList.remove("taskCard--completed");
-        renderTaskList(app);
+        const app = document.querySelector("#app");
+        app.append(new TaskList().render());
+
       }
       if (this.inputIsCompleted.checked) {
         taskData.tasks[taskIndex].isCompleted = true;
         taskData.tasks[taskIndex].completedOn = today;
         sessionStorage.setItem("todoAppData", JSON.stringify(taskData));
         this.taskCard.classList.add("taskCard--completed");
-        renderTaskList(app);
+        const app = document.querySelector("#app");
+        app.append(taskList.render());
+
       }
     });
 
@@ -132,7 +137,7 @@ export default class Task {
 
       sessionStorage.setItem("todoAppData", JSON.stringify(newTaskData));
       const app = document.querySelector("#app");
-      renderTaskList(app);
+      app.append(taskList.render());
     });
 
     return this.taskCard;

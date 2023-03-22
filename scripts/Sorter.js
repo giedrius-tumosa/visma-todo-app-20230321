@@ -17,7 +17,9 @@ export default class Sorter {
       return this.newOnTop(array);
     }
     return array.sort((a, b) =>
-      new Date(b.completedOn || 0).getTime() - new Date(a.completedOn || 0).getTime());
+      (new Date(b.completedOn || 0).getTime() - new Date(a.completedOn || 0).getTime())
+      || new Date(a.createdOn).getTime() - new Date(b.createdOn).getTime()
+    );
   }
 
   static closestDeadline(array) {

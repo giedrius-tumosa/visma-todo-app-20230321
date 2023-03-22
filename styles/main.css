@@ -28,3 +28,11 @@ ul {
 .taskCard--completed {
   text-decoration: line-through;
 }
+
+/* form */
+input,
+textarea,
+button,
+label {
+  display: block;
+}
