@@ -66,8 +66,6 @@ export default class ConfirmationWindow {
       const modal = document.querySelector(".overlayContainer");
       modal?.remove();
     });
-
-
     return this.overlayContainer;
   }
 }

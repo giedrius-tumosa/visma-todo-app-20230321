@@ -11,7 +11,7 @@ export default class SortPanelSection {
     // Heading
 
     this.sortHeading = document.createElement("h3");
-    let text = document.createTextNode("Sort your tasks here:");
+    let text = document.createTextNode("Sort your tasks here");
     this.sortHeading.append(text);
     this.sortPanelSection.append(this.sortHeading);
 

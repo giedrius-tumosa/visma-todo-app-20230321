@@ -1,0 +1,64 @@
+.taskCard {
+  border: 1px solid #cccccc;
+  padding: 1rem;
+  width: min(600px, 100%);
+  border-radius: 5px;
+  box-shadow: 1px 5px 5px #b3b3b331;
+  margin: 0 auto;
+}
+
+.taskCard > *:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+.taskCard__header {
+  border-bottom: 1px dashed #cccccc;
+  padding-bottom: 0.5rem;
+}
+
+.taskCard__header .contentWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: #6b6b6b;
+  text-align: center;
+}
+.inputIsCompletedWrapper {
+  font-size: 0.85rem;
+  color: #6b6b6b;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.taskCard__footer .contentWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskCard_description {
+  font-size: 1.3rem;
+  word-break: break-word;
+}
+
+.inputIsCompletedWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.taskCard--completed {
+  text-decoration: line-through;
+}
+
+/* Util */
+.overdue {
+  color: #ff8080;
+}
+
+@media screen and (min-width: 540px) {
+  .taskCard__header .contentWrap {
+    flex-direction: row;
+    text-align: start;
+  }
+}

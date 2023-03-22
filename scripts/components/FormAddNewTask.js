@@ -110,13 +110,30 @@ export default class FormAddNewTask {
     });
 
     // Cancel form event
-
     this.buttonCancel.addEventListener("click", () => {
-      // TODO: add form hide and expand animation
+      const form = document.querySelector(".formAddNewTask");
+      form.classList.remove("form--expand");
     });
+
+    // Text area min char error
+    this.descriptionInput.addEventListener("input", (e) => {
+      let value = e.target.value;
+      this.errorMsg = document.createElement("p");
+      if (value.length >= 160) {
+        this.errorMsg.setAttribute("class", "formErrorMsg");
+        text = document.createTextNode(`*No more than 160 characters allowed`);
+        this.errorMsg.append(text);
+        this.descriptionContainer.append(this.errorMsg);
+        this.errorMsg.classList.add("overdue");
+      }
+      if (value.length < 160) {
+        document.querySelector(".formErrorMsg")?.remove();
+      }
+    });
+
     return this.form;
   }
-
+  // Generates random id
   newId(array) {
     let id;
     let guard = 0;

@@ -27,7 +27,12 @@ export default class NewTaskSection {
     const formAddNewTask = new FormAddNewTask();
     this.formSection.append(formAddNewTask.render());
 
+    // Event listeners
 
+    this.addNewTaskTitle.addEventListener("click", () => {
+      const form = document.querySelector(".formAddNewTask");
+      form.classList.toggle("form--expand");
+    });
 
     return this.newTaskSection;
   }

@@ -7,43 +7,13 @@ import TaskList from "./components/TaskList.js";
 sessionStorage.setItem("todoAppData", JSON.stringify(data));
 
 const app = document.querySelector("#app");
+
+// Tasklist used by other components
 export const taskList = new TaskList();
+
+// Homepage render
 const homePage = new HomePage();
 app.append(homePage.render());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const body = document.querySelector("body");
-
-// export const taskList = new TaskList();
-
-// app.append(taskList.render());
-
-// const sortButton = document.createElement("button");
-// sortButton.setAttribute("type", "button");
-// sortButton.textContent = "SORT";
-
-// body.append(sortButton);
-
-// sortButton.addEventListener("click", () => {
-//   taskList.setOption = "completedRecent";
-//   app.append(taskList.render());
-// });
-
-
-
 
 
 

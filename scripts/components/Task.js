@@ -34,18 +34,29 @@ export default class Task {
     this.createdOn.append(text);
     this.headerContentWrap.append(this.createdOn);
 
+    // Deadline
+
+    const today = new Date().toLocaleString("lt").slice(0, 16);
+    const isOverdue = new Date(this.props.deadline).getTime() < new Date(today);
+
     this.deadline = document.createElement("span");
     this.deadline.setAttribute("class", "taskCard__deadline");
+
 
     if (this.props.isCompleted) {
       text = document.createTextNode(`Due in: task already completed`);
     }
     if (!this.props.isCompleted) {
-      const today = new Date().toLocaleString("lt").slice(0, 16);
       text = document.createTextNode(
-        `Due in: ${dateDifference(this.props.deadline, today)}`
+        `${isOverdue ? "Overdue by:" : "Due in:"} ${this.dateDifference(this.props.deadline, today)}`
       );
+
     }
+
+    // Change style if overdue and not completed
+    (isOverdue && !this.props.isCompleted) ?
+      this.deadline.classList.add("overdue") :
+      this.deadline.classList.remove("overdue");
 
     this.deadline.append(text);
     this.headerContentWrap.append(this.deadline);
@@ -127,41 +138,27 @@ export default class Task {
     // Delete button
 
     this.deleteButton.addEventListener("click", (e) => {
-
       const app = document.querySelector("#app");
       app.prepend(new ConfirmationWindow(this.props.description, this.props.id).render());
-
-
-
-
-
-      // const taskData = JSON.parse(sessionStorage.getItem("todoAppData"));
-      // const newTaskData = { tasks: taskData.tasks.filter(task => task.id !== this.props.id) };
-
-      // sessionStorage.setItem("todoAppData", JSON.stringify(newTaskData));
-      // const taskSection = document.querySelector(".main__taskSection");
-      // taskSection.append(taskList.render());
     });
 
     return this.taskCard;
   }
+  dateDifference(date1, date2) {
+    // Date difference in miliseconds
+    const dateDifference = new Date(date1) - new Date(date2);
+
+    // Conversion to DD HH MM format
+    const daysLeft = Math.trunc(
+      dateDifference / 1000 / 3600 / 24
+    );
+    const hoursLeft = Math.trunc(
+      (dateDifference - (daysLeft * 1000 * 3600 * 24)) / 1000 / 3600
+    );
+    const minutesLeft = Math.trunc(
+      ((dateDifference - (daysLeft * 1000 * 3600 * 24)) - hoursLeft * 1000 * 3600) / 1000 / 60
+    );
+    return !(date1 && date2) ? `no deadline` : `${daysLeft} d | ${hoursLeft} h | ${minutesLeft} min`;
+  }
 }
 
-function dateDifference(date1, date2) {
-  // Date difference in miliseconds
-  const dateDifference = new Date(date1) - new Date(date2);
-
-  // Conversion to DD HH MM format
-  const daysLeft = Math.trunc(
-    dateDifference / 1000 / 3600 / 24
-  );
-  const hoursLeft = Math.trunc(
-    (dateDifference - (daysLeft * 1000 * 3600 * 24)) / 1000 / 3600
-  );
-  const minutesLeft = Math.trunc(
-    ((dateDifference - (daysLeft * 1000 * 3600 * 24)) - hoursLeft * 1000 * 3600) / 1000 / 60
-  );
-
-
-  return !(date1 && date2) ? `no deadline` : `${daysLeft} d | ${hoursLeft} h | ${minutesLeft} min`;
-}

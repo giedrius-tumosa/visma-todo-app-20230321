@@ -1,0 +1,7 @@
+.header__heroHeading {
+  text-align: center;
+  text-transform: uppercase;
+}
+.header__heroHeading > * {
+  margin-bottom: 1rem;
+}

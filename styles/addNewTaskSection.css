@@ -1,0 +1,72 @@
+.addNewTaskSection {
+  text-align: center;
+  display: grid;
+  grid-template-columns: min(500px, 100%);
+  place-content: center;
+  gap: 1rem;
+}
+
+.formAddNewTask {
+  padding: 0rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+  border: 1px solid #b3b3b375;
+}
+
+.newTaskSection__title {
+  border-radius: 5px;
+  padding-block: 0.6rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-transform: uppercase;
+  box-shadow: 1px 5px 5px #b3b3b375;
+}
+
+.newTaskSection__title:hover {
+  background-image: linear-gradient(to right, #fff, #e0e0e0, #fff);
+}
+
+.formAddNewTask :is(textarea, label) {
+  width: 100%;
+}
+
+.formAddNewTask :is(textarea, input) {
+  padding: 0.5rem;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  box-shadow: 1px 5px 5px #b3b3b331;
+}
+
+.formAddNewTask label {
+  margin-bottom: 0.5rem;
+}
+
+#descriptionInput {
+  min-height: 6em;
+  font-size: 1rem;
+}
+
+#deadlineInput {
+  margin: 0 auto;
+  min-height: 2em;
+  font-size: 1rem;
+  width: min(300px, 100%);
+}
+
+.formButtonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+/* Form expand logic */
+
+.form--expand {
+  padding: 1rem;
+  max-height: 1000px;
+}
