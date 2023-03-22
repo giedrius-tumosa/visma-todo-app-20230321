@@ -1,3 +1,5 @@
+import { taskList } from "../main.js";
+
 export default class FormAddNewTask {
   constructor() {
   }
@@ -11,6 +13,8 @@ export default class FormAddNewTask {
 
     this.descriptionContainer = document.createElement("div");
     this.descriptionContainer.setAttribute("class", "descriptionContainer");
+    // TODO: restrict textarea to 160char manually
+    // todo: add confirmation window if item is about tobe deleted
 
     this.descriptionLabel = document.createElement("label");
     this.descriptionLabel.setAttribute("for", "descriptionInput");
@@ -20,7 +24,7 @@ export default class FormAddNewTask {
     this.descriptionInput = document.createElement("textarea");
     this.descriptionInput.setAttribute("id", "descriptionInput");
     this.descriptionInput.setAttribute("name", "descriptionInput");
-    this.descriptionInput.setAttribute("maxlength", 160);
+    this.descriptionInput.setAttribute("maxlength", "160");
     this.descriptionInput.setAttribute("required", "required");
 
     this.descriptionContainer.append(this.descriptionLabel, this.descriptionInput);
@@ -85,16 +89,30 @@ export default class FormAddNewTask {
 
       // Add new task to database
       const taskData = JSON.parse(sessionStorage.getItem("todoAppData"));
+      const today = new Date().toLocaleString("lt").slice(0, 16);
+      const revisedDeadline = deadline ? new Date(deadline).toLocaleString("lt").slice(0, 16) : "";
 
+      const newTask = {
+        id: `${this.newId(taskData.tasks)}`,
+        description: description,
+        deadline: revisedDeadline,
+        createdOn: today,
+        completedOn: "",
+        isCompleted: false
+      };
 
+      taskData.tasks.push(newTask);
+      sessionStorage.setItem("todoAppData", JSON.stringify(taskData));
 
-
+      // Re-render tasklist
+      const taskSection = document.querySelector(".main__taskSection");
+      taskSection.append(taskList.render());
     });
 
     // Cancel form event
 
     this.buttonCancel.addEventListener("click", () => {
-
+      // TODO: add form hide and expand animation
     });
     return this.form;
   }
@@ -104,7 +122,7 @@ export default class FormAddNewTask {
     let guard = 0;
     while (!id) {
       guard++;
-      if (counter > 10000) break;
+      if (guard > 10000) break;
       const randomNum = Math.floor(Math.random() * 10000);
       const today = parseInt(new Date().getTime());
       const finalId = randomNum + today;

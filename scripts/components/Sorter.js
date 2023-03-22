@@ -16,9 +16,17 @@ export default class Sorter {
     if (array.every(task => !task.isCompleted)) {
       return this.newOnTop(array);
     }
-    return array.sort((a, b) =>
-      (new Date(b.completedOn || 0).getTime() - new Date(a.completedOn || 0).getTime())
-      || new Date(a.createdOn).getTime() - new Date(b.createdOn).getTime()
+    return array.sort((a, b) => {
+      if (a.isCompleted && !b.isCompleted) {
+        return -1;
+      } else if (!a.isCompleted && b.isCompleted) {
+        return 1;
+      } else if (a.isCompleted && b.isCompleted) {
+        return new Date(b.completedOn) - new Date(a.completedOn);
+      } else {
+        return new Date(a.deadline) - new Date(b.deadline);
+      }
+    }
     );
   }
 
@@ -40,3 +48,12 @@ export default class Sorter {
   }
 }
 
+// static recentlyCompleted(array) {
+//   // If no completed items, uses default sorting;
+//   if (array.every(task => !task.isCompleted)) {
+//     return this.newOnTop(array);
+//   }
+//   return array.sort((a, b) =>
+//     (new Date(b.completedOn || 0).getTime() - new Date(a.completedOn || 0).getTime())
+//   );
+// }

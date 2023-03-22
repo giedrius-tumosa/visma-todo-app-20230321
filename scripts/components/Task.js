@@ -1,5 +1,5 @@
-import TaskList from "./TaskList.js";
-import { taskList } from "./main.js";
+import { taskList } from "../main.js";
+import ConfirmationWindow from "./ConfirmationWindow.js";
 
 export default class Task {
   constructor(props) {
@@ -105,39 +105,42 @@ export default class Task {
     this.inputIsCompleted.addEventListener("change", (e) => {
       const taskData = JSON.parse(sessionStorage.getItem("todoAppData"));
       const taskIndex = taskData.tasks.findIndex((task) => task.id === this.props.id);
-      const app = document.querySelector("#app");
+      const taskSection = document.querySelector(".main__taskSection");
       const today = new Date().toLocaleString("lt").slice(0, 16);
-
 
       if (!this.inputIsCompleted.checked) {
         taskData.tasks[taskIndex].isCompleted = false;
         taskData.tasks[taskIndex].completedOn = "";
         sessionStorage.setItem("todoAppData", JSON.stringify(taskData));
         this.taskCard.classList.remove("taskCard--completed");
-        const app = document.querySelector("#app");
-        app.append(new TaskList().render());
-
+        taskSection.append(taskList.render());
       }
       if (this.inputIsCompleted.checked) {
         taskData.tasks[taskIndex].isCompleted = true;
         taskData.tasks[taskIndex].completedOn = today;
         sessionStorage.setItem("todoAppData", JSON.stringify(taskData));
         this.taskCard.classList.add("taskCard--completed");
-        const app = document.querySelector("#app");
-        app.append(taskList.render());
-
+        taskSection.append(taskList.render());
       }
     });
 
     // Delete button
 
     this.deleteButton.addEventListener("click", (e) => {
-      const taskData = JSON.parse(sessionStorage.getItem("todoAppData"));
-      const newTaskData = { tasks: taskData.tasks.filter(task => task.id !== this.props.id) };
 
-      sessionStorage.setItem("todoAppData", JSON.stringify(newTaskData));
       const app = document.querySelector("#app");
-      app.append(taskList.render());
+      app.prepend(new ConfirmationWindow(this.props.description, this.props.id).render());
+
+
+
+
+
+      // const taskData = JSON.parse(sessionStorage.getItem("todoAppData"));
+      // const newTaskData = { tasks: taskData.tasks.filter(task => task.id !== this.props.id) };
+
+      // sessionStorage.setItem("todoAppData", JSON.stringify(newTaskData));
+      // const taskSection = document.querySelector(".main__taskSection");
+      // taskSection.append(taskList.render());
     });
 
     return this.taskCard;

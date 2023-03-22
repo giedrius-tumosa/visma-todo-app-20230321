@@ -1,6 +1,7 @@
 import HeroHeading from "./HeroHeading.js";
-import { taskList } from "./main.js";
+import { taskList } from "../main.js";
 import NewTaskSection from "./NewTaskSection.js";
+import SortPanelSection from "./SortPanelSection.js";
 
 export default class HomePage {
   constructor() {
@@ -22,6 +23,11 @@ export default class HomePage {
     this.main = document.createElement("main");
     this.main.setAttribute("class", "main--global");
     this.HomePage.append(this.main);
+
+    // Sort panel section
+
+    const sortPanelSection = new SortPanelSection();
+    this.main.append(sortPanelSection.render());
 
     // New task section
 
