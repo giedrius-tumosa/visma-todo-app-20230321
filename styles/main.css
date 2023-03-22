@@ -1,0 +1,30 @@
+.taskCard {
+  border: 1px solid black;
+  padding: 1rem;
+  max-width: 500px;
+}
+.taskCard__header .contentWrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.taskCard__footer .contentWrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.taskCard_description {
+  font-size: 1.3rem;
+}
+
+/* ********* */
+
+ul {
+  list-style-type: none;
+}
+
+/* is Completed */
+
+.taskCard--completed {
+  text-decoration: line-through;
+}
