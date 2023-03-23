@@ -3,16 +3,16 @@ export const data = {
     {
       id: "1",
       description: "Go to the movies with friends",
-      deadline: "2023-03-15 21:00",
-      createdOn: "2023-03-21 00:00",
+      deadline: "2023-03-16 21:00",
+      createdOn: "2023-03-15 00:00",
       completedOn: "",
       isCompleted: false
     },
     {
       id: "2",
       description: "Buy some groceries.",
-      deadline: "2022-10-01 12:00",
-      createdOn: "2023-03-01 12:00",
+      deadline: "2023-03-01 12:00",
+      createdOn: "2022-12-01 12:00",
       completedOn: "",
       isCompleted: false
     },
