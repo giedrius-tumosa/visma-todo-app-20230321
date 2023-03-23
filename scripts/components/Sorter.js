@@ -47,13 +47,3 @@ export default class Sorter {
     });
   }
 }
-
-// static recentlyCompleted(array) {
-//   // If no completed items, uses default sorting;
-//   if (array.every(task => !task.isCompleted)) {
-//     return this.newOnTop(array);
-//   }
-//   return array.sort((a, b) =>
-//     (new Date(b.completedOn || 0).getTime() - new Date(a.completedOn || 0).getTime())
-//   );
-// }

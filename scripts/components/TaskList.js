@@ -28,6 +28,17 @@ export default class TaskList {
     // Get data to render
     const taskData = JSON.parse(sessionStorage.getItem("todoAppData"));
 
+    // Handle no tasks in the database
+    if (taskData.tasks.length === 0) {
+      this.noTasksMsg = document.createElement("h2");
+      this.noTasksMsg.setAttribute("class", "noTasksMsg");
+      let text = document.createTextNode("No tasks have been created.");
+      this.noTasksMsg.append(text);
+      this.taskList.append(this.noTasksMsg);
+    } else {
+      document.querySelector(".noTasksMsg")?.remove();
+    }
+
     // Sorting options
     switch (this.sortOption) {
       case "completedRecent":

@@ -13,8 +13,6 @@ export default class FormAddNewTask {
 
     this.descriptionContainer = document.createElement("div");
     this.descriptionContainer.setAttribute("class", "descriptionContainer");
-    // TODO: restrict textarea to 160char manually
-    // todo: add confirmation window if item is about tobe deleted
 
     this.descriptionLabel = document.createElement("label");
     this.descriptionLabel.setAttribute("for", "descriptionInput");
@@ -81,7 +79,6 @@ export default class FormAddNewTask {
         e.target.deadlineInput.value,
       ];
 
-      console.log(description, deadline);
 
       // Reset
       this.descriptionInput.value = "";
